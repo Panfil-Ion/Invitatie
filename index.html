@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Invitație</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold: #c9a962;
+      --gold-soft: #d4bc7c;
+      --cream: #f5f0e8;
+      --charcoal: #18181b;
+    }
+
+    body {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      background-color: var(--charcoal);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .font-display {
+      font-family: "Playfair Display", Georgia, serif;
+    }
+
+    .text-gold {
+      color: var(--gold-soft);
+    }
+
+    .text-cream {
+      color: var(--cream);
+    }
+
+    .border-gold-soft {
+      border-color: rgba(201, 169, 98, 0.45);
+    }
+
+    .btn-outline-landing {
+      border: 1px solid rgba(201, 169, 98, 0.5);
+      color: var(--cream);
+      transition:
+        border-color 0.35s ease,
+        color 0.35s ease,
+        background-color 0.35s ease,
+        box-shadow 0.35s ease,
+        transform 0.25s ease;
+    }
+
+    .btn-outline-landing:hover {
+      border-color: var(--gold-soft);
+      color: #1a1a1c;
+      background-color: rgba(212, 188, 124, 0.92);
+      box-shadow: 0 0 24px rgba(201, 169, 98, 0.2);
+    }
+
+    .btn-yes {
+      background: linear-gradient(145deg, rgba(201, 169, 98, 0.95), rgba(166, 139, 78, 0.98));
+      color: #1c1917;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.3s ease,
+        filter 0.3s ease;
+    }
+
+    .btn-yes:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(201, 169, 98, 0.25);
+      filter: brightness(1.05);
+    }
+
+    .btn-yes:active {
+      transform: translateY(0);
+    }
+
+    .btn-no {
+      border: 1px solid rgba(201, 169, 98, 0.35);
+      color: rgba(245, 240, 232, 0.85);
+      background: rgba(39, 39, 42, 0.6);
+      backdrop-filter: blur(8px);
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+      touch-action: manipulation;
+      user-select: none;
+    }
+
+    .card-glow {
+      box-shadow:
+        0 0 0 1px rgba(201, 169, 98, 0.12),
+        0 24px 48px -12px rgba(0, 0, 0, 0.55),
+        0 0 80px -20px rgba(201, 169, 98, 0.08);
+    }
+
+    #landing-view,
+    #invite-view {
+      transition:
+        opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.75s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0s linear 0.75s;
+    }
+
+    #landing-view.is-visible {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+      transition:
+        opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.75s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0s linear 0s;
+    }
+
+    #landing-view.is-hidden {
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition:
+        opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.75s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0s linear 0.75s;
+    }
+
+    #invite-view.is-visible {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+      transition:
+        opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.75s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0s linear 0s;
+    }
+
+    #invite-view.is-hidden {
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+      transition:
+        opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.75s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0s linear 0.75s;
+    }
+
+    #success-view {
+      transition: opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #success-view.is-visible {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    #success-view.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="min-h-dvh bg-zinc-900 text-cream antialiased overflow-x-hidden">
+  <main class="relative min-h-dvh flex flex-col items-center justify-center px-5 py-10 sm:px-8 pb-[max(2.5rem,env(safe-area-inset-bottom))]">
+    <!-- Landing -->
+    <section
+      id="landing-view"
+      class="is-visible absolute inset-0 flex flex-col items-center justify-center gap-10 px-5 text-center z-10"
+      aria-label="Ecran de început"
+    >
+      <p class="font-display text-2xl sm:text-3xl md:text-4xl font-medium text-gold tracking-wide max-w-md leading-snug">
+        Pentru fata din tren...
+      </p>
+      <button
+        type="button"
+        id="open-btn"
+        class="btn-outline-landing font-display text-sm sm:text-base uppercase tracking-[0.2em] px-10 py-3.5 rounded-sm"
+      >
+        Deschide
+      </button>
+    </section>
+
+    <!-- Invitation card -->
+    <section
+      id="invite-view"
+      class="is-hidden relative z-20 w-full max-w-md"
+      aria-label="Invitație"
+      hidden
+    >
+      <div class="card-glow rounded-sm bg-zinc-900/90 border border-zinc-800/80 px-6 py-9 sm:px-10 sm:py-11 backdrop-blur-sm">
+        <h1 class="font-display text-2xl sm:text-3xl font-medium text-gold mb-5 text-center leading-tight">
+          Salut, [Numele Ei]!
+        </h1>
+        <p class="text-lg sm:text-xl text-cream/90 text-center leading-relaxed font-medium">
+          A fost o coincidență prea bună ca să o lăsăm doar în tren. Te invit la o cafea când ne întoarcem în oraș.
+        </p>
+
+        <div class="mt-9 flex flex-col sm:flex-row sm:items-stretch gap-4 sm:gap-3">
+          <button
+            type="button"
+            id="yes-btn"
+            class="btn-yes font-display w-full sm:flex-1 shrink-0 text-center text-sm sm:text-base font-semibold uppercase tracking-[0.12em] px-5 py-3.5 rounded-sm order-1 sm:order-none"
+          >
+            Sună bine
+          </button>
+
+          <!-- Runaway NO: parent is the playground -->
+          <div
+            id="no-playground"
+            class="relative w-full sm:flex-1 min-h-[120px] sm:min-h-[56px] order-2 sm:order-none rounded-sm border border-zinc-800/50 bg-zinc-950/40"
+            aria-hidden="true"
+          >
+            <button
+              type="button"
+              id="no-btn"
+              class="btn-no font-display absolute text-sm sm:text-base font-medium tracking-wide px-4 py-3 rounded-sm whitespace-nowrap left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+              style="left: 50%; top: 50%; transform: translate(-50%, -50%)"
+            >
+              Poate altă dată
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Success overlay -->
+    <div
+      id="success-view"
+      class="is-hidden fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/95 px-6"
+      aria-live="polite"
+    >
+      <p class="font-display text-xl sm:text-2xl md:text-3xl text-gold text-center max-w-sm leading-relaxed">
+        Perfect. Îți scriu să stabilim detaliile.
+      </p>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var landing = document.getElementById("landing-view");
+      var invite = document.getElementById("invite-view");
+      var openBtn = document.getElementById("open-btn");
+      var yesBtn = document.getElementById("yes-btn");
+      var noBtn = document.getElementById("no-btn");
+      var playground = document.getElementById("no-playground");
+      var success = document.getElementById("success-view");
+
+      function showInvite() {
+        landing.classList.remove("is-visible");
+        landing.classList.add("is-hidden");
+        invite.removeAttribute("hidden");
+        invite.classList.remove("is-hidden");
+        invite.classList.add("is-visible");
+        requestAnimationFrame(function () {
+          positionNoButtonRandom(true);
+        });
+      }
+
+      function showSuccess() {
+        invite.classList.remove("is-visible");
+        invite.classList.add("is-hidden");
+        success.classList.remove("is-hidden");
+        success.classList.add("is-visible");
+      }
+
+      function positionNoButtonRandom(isInitial) {
+        var pw = playground.clientWidth;
+        var ph = playground.clientHeight;
+        var bw = noBtn.offsetWidth;
+        var bh = noBtn.offsetHeight;
+        var pad = 8;
+        var xMin = pad;
+        var xMax = Math.max(xMin, pw - bw - pad);
+        var yMin = pad;
+        var yMax = Math.max(yMin, ph - bh - pad);
+        var x = xMin + Math.random() * (xMax - xMin || 0);
+        var y = yMin + Math.random() * (yMax - yMin || 0);
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+        noBtn.style.transform = "none";
+        if (!isInitial) {
+          noBtn.classList.add("ring-1", "ring-amber-200/30");
+          clearTimeout(noBtn._flashTimer);
+          noBtn._flashTimer = setTimeout(function () {
+            noBtn.classList.remove("ring-1", "ring-amber-200/30");
+          }, 120);
+        }
+      }
+
+      function teleportNo(ev) {
+        if (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+        }
+        positionNoButtonRandom(false);
+      }
+
+      openBtn.addEventListener("click", showInvite);
+      yesBtn.addEventListener("click", showSuccess);
+
+      noBtn.addEventListener("mouseenter", teleportNo);
+      noBtn.addEventListener("touchstart", teleportNo, { passive: false });
+      noBtn.addEventListener("focus", teleportNo);
+
+      window.addEventListener("resize", function () {
+        if (invite.classList.contains("is-visible")) {
+          positionNoButtonRandom(true);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
