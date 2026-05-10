@@ -1,0 +1,12 @@
+{
+  "name": "invitatie",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static invitation page served for Railway / Node hosts",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
