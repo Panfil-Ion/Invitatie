@@ -169,7 +169,7 @@
       aria-label="Ecran de început"
     >
       <p class="font-display text-xl sm:text-2xl md:text-3xl font-medium text-gold tracking-wide max-w-[22rem] sm:max-w-xl md:max-w-2xl leading-snug px-1">
-        Pentru fata cu ochii strălucitori din tren...
+        Pentru fata cu ochi strălucitori din tren.
       </p>
       <button
         type="button"
@@ -183,40 +183,37 @@
     <!-- Invitation card -->
     <section
       id="invite-view"
-      class="is-hidden relative z-20 w-full max-w-md"
+      class="is-hidden relative z-20 w-full max-w-lg"
       aria-label="Invitație"
       hidden
     >
       <div class="card-glow rounded-sm bg-zinc-900/90 border border-zinc-800/80 px-6 py-9 sm:px-10 sm:py-11 backdrop-blur-sm">
-        <h1 class="font-display text-2xl sm:text-3xl font-medium text-gold mb-5 text-center leading-tight">
-          Salut, [Numele Ei]!
-        </h1>
-        <p class="text-lg sm:text-xl text-cream/90 text-center leading-relaxed font-medium">
-          A fost o coincidență prea bună ca să o lăsăm doar în tren. Te invit la o cafea când ne întoarcem în oraș.
+        <p class="font-display text-lg sm:text-xl md:text-2xl text-cream/92 text-center leading-relaxed font-normal tracking-[0.02em]">
+          Să continuăm discuția pe care n-am apucat să o avem. O cafea în oraș, săptămâna viitoare?
         </p>
 
-        <div class="mt-9 flex flex-col sm:flex-row sm:items-stretch gap-4 sm:gap-3">
+        <div class="mt-9 flex flex-row items-stretch gap-2.5 sm:gap-3 w-full min-w-0">
           <button
             type="button"
             id="yes-btn"
-            class="btn-yes font-display w-full sm:flex-1 shrink-0 text-center text-sm sm:text-base font-semibold uppercase tracking-[0.12em] px-5 py-3.5 rounded-sm order-1 sm:order-none"
+            class="btn-yes font-display flex-[1.65] min-w-0 shrink text-center text-base sm:text-lg font-semibold tracking-wide px-4 sm:px-6 py-4 sm:py-[1.15rem] rounded-sm leading-tight"
           >
-            Sună bine
+            Da, cu drag
           </button>
 
           <!-- Runaway NO: parent is the playground -->
           <div
             id="no-playground"
-            class="relative w-full sm:flex-1 min-h-[120px] sm:min-h-[56px] order-2 sm:order-none rounded-sm border border-zinc-800/50 bg-zinc-950/40"
+            class="relative flex-1 min-w-0 min-h-[112px] sm:min-h-[3.75rem] rounded-sm border border-zinc-800/50 bg-zinc-950/40"
             aria-hidden="true"
           >
             <button
               type="button"
               id="no-btn"
-              class="btn-no font-display absolute text-sm sm:text-base font-medium tracking-wide px-4 py-3 rounded-sm whitespace-nowrap left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+              class="btn-no font-display absolute text-xs sm:text-sm font-medium tracking-wide px-2.5 py-2 sm:px-3 sm:py-2 rounded-sm whitespace-nowrap left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
               style="left: 50%; top: 50%; transform: translate(-50%, -50%)"
             >
-              Poate altă dată
+              Nu
             </button>
           </div>
         </div>
